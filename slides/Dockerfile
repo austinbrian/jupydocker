@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-slim
 RUN pip install jupyter numpy matplotlib rise
 RUN mkdir notebooks
 WORKDIR notebooks/
@@ -10,7 +10,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/
 RUN chmod +x /usr/bin/tini
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-CMD ["jupyter", "notebook", "/notebooks/JupyterSlides.ipynb","--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root","--NotebookApp.token='admin'"]
+CMD ["jupyter", "notebook", "/notebooks/JupyDockerSlides.ipynb","--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root","--NotebookApp.token='pydata'"]
 
 
 
