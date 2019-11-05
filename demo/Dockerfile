@@ -1,20 +1,20 @@
-FROM ubuntu:latest
+FROM jessie-slim:latest
 RUN apt-get update && apt-get -y update
 RUN apt-get install -y build-essential python3.6 python3-pip python3-dev
 RUN pip3 -q install pip –upgrade
 
-RUN mkdir src
-WORKDIR src/
+RUN mkdir demo
+WORKDIR demo/
 COPY . .
 
 RUN pip3 install -r requirements.txt
 RUN pip3 install jupyter
 
-RUN python3 module.py
+RUN python3 data_pipeline.py
 
-RUN rm /src/data/raw_data.csv
+RUN rm /demo/src/data/raw_data.csv
 
-WORKDIR /src/notebooks
+WORKDIR /demo
 
 # Add Tini. Tini operates as a process subreaper for jupyter. This prevents kernel crashes.
 ENV TINI_VERSION v0.6.0
